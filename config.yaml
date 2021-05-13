@@ -1,16 +1,16 @@
 version: 0.01
 mysql:
-  host: 172.16.3.158
+  host: 127.0.0.1
   user: root
   pwd: 123456
-  dbname: spa_catalog_items
+  dbname: test
   port: 3306
 es:
   host: 127.0.0.1
-  index: spa_catalog_items
+  index: test
   port: 9200
 table:
-  - name: item
+  - name: user
     rebuild: True
     batch: 2000
     where: 
