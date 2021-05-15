@@ -51,7 +51,7 @@ func TestESIndexExist(t *testing.T) {
 }
 
 func TestESDelete(t *testing.T) {
-	ok, err := ESDelete("clx", "man1")
+	ok, err := ESDeleteIndex("clx", "man1")
 	assert.NoError(t, err)
 	t.Log(ok)
 }

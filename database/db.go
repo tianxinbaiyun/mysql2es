@@ -40,7 +40,7 @@ func GetDB(conn config.MysqlConn) *sql.DB {
 
 // GetFieldList 获取数据库表字段列表
 func GetFieldList(tableName string) (fields []string, err error) {
-	sqlStr := "SELECT column_name FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '%s' AND TABLE_NAME = '%s'"
+	sqlStr := "SELECT column_name FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '%s' AND TABLE_NAME = '%s' ORDER BY ordinal_position"
 	sqlStr = fmt.Sprintf(sqlStr, GetDBName(), tableName)
 	rows, err := db.Query(sqlStr)
 	if err != nil {
