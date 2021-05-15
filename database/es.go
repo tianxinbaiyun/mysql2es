@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/olivere/elastic"
+	"github.com/tianxinbaiyun/mysql2es/config"
 	"log"
-	"tool.site/mysql2es/config"
 )
 
 // ESClient es客户端

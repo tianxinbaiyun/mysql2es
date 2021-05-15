@@ -2,8 +2,8 @@ package database
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/tianxinbaiyun/mysql2es/config"
 	"testing"
-	"tool.site/mysql2es/config"
 )
 
 func init() {

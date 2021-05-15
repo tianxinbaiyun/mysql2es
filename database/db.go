@@ -6,7 +6,7 @@ import (
 	"log"
 	"strings"
 
-	"tool.site/mysql2es/config"
+	"github.com/tianxinbaiyun/mysql2es/config"
 
 	_ "github.com/go-sql-driver/mysql" //mysql
 )

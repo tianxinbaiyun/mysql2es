@@ -1,4 +1,4 @@
-module tool.site/mysql2es
+module github.com/tianxinbaiyun/mysql2es
 
 go 1.15
 

@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/tianxinbaiyun/mysql2es/service"
 	"testing"
-	"tool.site/mysql2es/service"
 )
 
 func TestJob(t *testing.T) {

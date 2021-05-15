@@ -1,9 +1,9 @@
 package service
 
 import (
+	"github.com/tianxinbaiyun/mysql2es/config"
+	"github.com/tianxinbaiyun/mysql2es/database"
 	"log"
-	"tool.site/mysql2es/config"
-	"tool.site/mysql2es/database"
 )
 
 // Sync 同步函数
