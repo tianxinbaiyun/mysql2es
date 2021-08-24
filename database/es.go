@@ -3,7 +3,7 @@ package database
 import (
 	"context"
 	"fmt"
-	"github.com/olivere/elastic"
+	"github.com/olivere/elastic/v7"
 	"github.com/tianxinbaiyun/mysql2es/config"
 	"log"
 )
@@ -29,8 +29,8 @@ func GetESClient(conn config.EsConn) *elastic.Client {
 	return ESClient
 }
 
-// ESCreatIndex 创建索引
-func ESCreatIndex(index string) (err error) {
+// CreateESIndex 创建索引
+func CreateESIndex(index string) (err error) {
 	_, err = ESClient.CreateIndex(index).Do(context.Background())
 	if err != nil {
 		log.Println(err)
@@ -39,8 +39,8 @@ func ESCreatIndex(index string) (err error) {
 	return
 }
 
-// ESIndexExist 索引是否存在
-func ESIndexExist(index string) (ok bool) {
+// GetESIndexExist 索引是否存在
+func GetESIndexExist(index string) (ok bool) {
 	ok, err := ESClient.IndexExists().Index([]string{index}).Do(context.Background())
 	if err != nil {
 		log.Println(err)
@@ -49,9 +49,9 @@ func ESIndexExist(index string) (ok bool) {
 	return
 }
 
-// ESInsert 创建
-func ESInsert(index string, esType string, data interface{}) (err error) {
-	_, err = ESClient.Index().Index(index).Type(esType).BodyJson(data).Do(context.Background())
+// InsertESData 创建
+func InsertESData(index string, data interface{}) (err error) {
+	_, err = ESClient.Index().Index(index).BodyJson(data).Do(context.Background())
 	if err != nil {
 		log.Println(err)
 		return
@@ -59,22 +59,10 @@ func ESInsert(index string, esType string, data interface{}) (err error) {
 	return
 }
 
-// ESQuery ESQuery 查询
-func ESQuery(index, esType string) (data interface{}, err error) {
-
-	data, err = ESClient.Get().Index(index).Type(esType).Do(context.Background())
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	return
-}
-
-// ESUpdate ESUpdate 更新
-func ESUpdate(index, esType, ID string, data map[string]string) (err error) {
+// UpdateESData 更新
+func UpdateESData(index, ID string, data map[string]string) (err error) {
 	_, err = ESClient.Update().
 		Index(index).
-		Type(esType).
 		Id(ID).
 		Doc(data).
 		Do(context.Background())
@@ -85,8 +73,8 @@ func ESUpdate(index, esType, ID string, data map[string]string) (err error) {
 	return
 }
 
-// ESDeleteIndex 删除es表
-func ESDeleteIndex(index, esType string) (ok bool, err error) {
+// DeleteESIndex 删除es表
+func DeleteESIndex(index string) (ok bool, err error) {
 	res, err := ESClient.DeleteIndex().Index([]string{index}).Do(context.Background())
 	if err != nil {
 		log.Println(err)

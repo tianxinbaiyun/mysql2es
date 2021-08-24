@@ -36,14 +36,14 @@ func Sync() {
 		// 如果配置重建，则清空数据
 		if table.Rebuild {
 			// 如果不存在，创建索引
-			if !database.ESIndexExist(config.C.ES.Index) {
-				err = database.ESCreatIndex(config.C.ES.Index)
+			if !database.GetESIndexExist(config.C.ES.Index) {
+				err = database.CreateESIndex(config.C.ES.Index)
 				if err != nil {
 					return
 				}
 			}
 			// 请求索引对应的数据库
-			_, err = database.ESDeleteIndex(config.C.ES.Index, table.Name)
+			_, err = database.DeleteESIndex(config.C.ES.Index)
 			if err != nil {
 				log.Println("err:", err)
 				return
@@ -75,7 +75,7 @@ func Sync() {
 				for i, s := range row {
 					data[fields[i]] = s
 				}
-				err = database.ESInsert(config.C.ES.Index, table.Name, data)
+				err = database.InsertESData(config.C.ES.Index, data)
 				if err != nil {
 					log.Println("err:", err)
 					return
