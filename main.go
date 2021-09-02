@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
-	"github.com/tianxinbaiyun/mysql2es/crontab"
 	"github.com/tianxinbaiyun/mysql2es/service"
 	"net/http"
 )
@@ -11,7 +10,7 @@ import (
 func main() {
 
 	// 定时任务
-	go crontab.AddCron()
+	//go crontab.AddCron()
 
 	// 添加路由
 	engine := gin.New()
