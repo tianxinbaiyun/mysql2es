@@ -26,6 +26,7 @@ func Sync() {
 
 	//同步数据
 	for _, table := range config.C.Table {
+		offset = 0
 		fields := make([]string, 0)
 		// 获取表字段
 		fields, err = database.GetFieldList(table.Name)

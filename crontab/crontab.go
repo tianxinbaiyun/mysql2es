@@ -11,7 +11,7 @@ func AddCron() {
 	var err error
 	c := cron.New()
 	// 添加任务
-	_, err = c.AddFunc("0 */2 * * *", func() {
+	_, err = c.AddFunc("*/2 * * * *", func() {
 		service.Sync()
 	})
 	if err != nil {

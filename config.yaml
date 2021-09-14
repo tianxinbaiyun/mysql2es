@@ -4,19 +4,13 @@ mysql:
   user: root
   pwd: 123456
   dbname: test
-  port: 3306
+  port: 123456
 es:
   host: 127.0.0.1
   index: test
   port: 9200
 table:
-  - name: user
-    rebuild: True
+  - name: test
+    rebuild: false
     batch: 2000
-    where: 
-#      -
-#  - name: item_trace
-#    rebuild: True
-#    batch: 1000
-#    where:
-#      -
+    where:

@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
+	"github.com/tianxinbaiyun/mysql2es/crontab"
 	"github.com/tianxinbaiyun/mysql2es/service"
 	"net/http"
 )
@@ -20,7 +21,7 @@ func main() {
 	pprof.Register(engine)
 
 	// 启用监听端口
-	if err := engine.Run(":8080"); err != nil {
+	if err := engine.Run(":18080"); err != nil {
 		panic(err)
 	}
 
