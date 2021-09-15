@@ -11,7 +11,7 @@ import (
 func main() {
 
 	// 定时任务
-	//go crontab.AddCron()
+	go crontab.AddCron()
 
 	// 添加路由
 	engine := gin.New()

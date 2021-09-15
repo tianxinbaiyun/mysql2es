@@ -27,9 +27,12 @@ type MysqlConn struct {
 
 // EsConn es连接结构体
 type EsConn struct {
-	Host  string `yaml:"host"`
-	Port  string `yaml:"port"`
-	Index string `yaml:"index"`
+	Host        string   `yaml:"host"`
+	Port        string   `yaml:"port"`
+	IntFields   []string `yaml:"int_fields"`
+	DateFields  []string `yaml:"date_fields"`
+	FloatFields []string `yaml:"float_fields"`
+	Index       string   `yaml:"index"`
 }
 
 //TableInfo 表结构体

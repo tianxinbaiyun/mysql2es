@@ -1,9 +1,11 @@
 package service
 
 import (
+	"github.com/jinzhu/now"
 	"github.com/tianxinbaiyun/mysql2es/config"
 	"github.com/tianxinbaiyun/mysql2es/database"
 	"log"
+	"strconv"
 )
 
 // Sync 同步函数
@@ -23,6 +25,20 @@ func Sync() {
 	// 连接数据库
 	database.InitES()
 	database.InitDB()
+
+	// 获取配置的index字段类型
+	intFields := make(map[string]bool)
+	dateFields := make(map[string]bool)
+	floatFields := make(map[string]bool)
+	for _, fieldName := range config.C.ES.IntFields {
+		intFields[fieldName] = true
+	}
+	for _, fieldName := range config.C.ES.DateFields {
+		dateFields[fieldName] = true
+	}
+	for _, fieldName := range config.C.ES.FloatFields {
+		floatFields[fieldName] = true
+	}
 
 	//同步数据
 	for _, table := range config.C.Table {
@@ -72,9 +88,27 @@ func Sync() {
 
 			// 循环插入数据
 			for _, row := range rows {
-				data := map[string]string{}
+				data := map[string]interface{}{}
 				for i, s := range row {
-					data[fields[i]] = s
+					switch {
+					case intFields[fields[i]]:
+						data[fields[i]], err = strconv.Atoi(s)
+						if err != nil {
+							log.Println("int field err:", err)
+						}
+					case dateFields[fields[i]]:
+						data[fields[i]], err = now.Parse(s)
+						if err != nil {
+							log.Println("date field err:", err)
+						}
+					case floatFields[fields[i]]:
+						data[fields[i]], err = strconv.ParseFloat(s, 64)
+						if err != nil {
+							log.Println("date field err:", err)
+						}
+					default:
+						data[fields[i]] = s
+					}
 				}
 				err = database.InsertESData(config.C.ES.Index, data)
 				if err != nil {
