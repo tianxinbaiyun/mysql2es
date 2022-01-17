@@ -3,61 +3,17 @@ mysql:
   host: 127.0.0.1
   user: root
   pwd: root
-  dbname: report
-  port: 33061
+  dbname: test_db
+  port: 3306
 es:
   host: 127.0.0.1
-  index: r_error_caesar
+  index: test_db
   int_fields: [ 'unix_time','unix_day','grade' ]
   float_fields: [  ]
   date_fields: [ 'create_time' ]
   port: 9200
 table:
-  - name: r_error_caesar_201901
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201902
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201903
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201904
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201905
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201906
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201907
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201908
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201909
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201910
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201911
-    rebuild: false
-    batch: 2000
-    where:
-  - name: r_error_caesar_201912
+  - name: test
     rebuild: false
     batch: 2000
     where:
